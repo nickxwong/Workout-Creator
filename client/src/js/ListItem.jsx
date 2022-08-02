@@ -3,7 +3,7 @@ import '../css/ListItem.css';
 const ListItem = (props) => {
     return (
         <div className="list-item">
-            <h3>{props.name}</h3>
+            <h3>{props.name} <span>({props.equipment})</span></h3>
             <div className="target-muscles">
                 <div className="primary">{props.primary}</div>
                 {props.secondary != null &&

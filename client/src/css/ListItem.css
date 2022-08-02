@@ -1,5 +1,9 @@
 .list-item {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.list-item h3 span {
+    font-weight: 500;
 }
 
 .target-muscles {

@@ -8,7 +8,7 @@ const ExerciseList = (props) => {
             <div className="container">
                 {props.list.map((val, key) => {
                     return (
-                        <ListItem key={val.exercise_id} name={val.exercise_name} primary={val.primary_muscle} secondary={val.secondary_muscle} tertiary={val.tertiary_muscle}></ListItem>
+                        <ListItem key={val.exercise_id} name={val.exercise_name} primary={val.primary_muscle} secondary={val.secondary_muscle} tertiary={val.tertiary_muscle} equipment={val.equipment_name}></ListItem>
                     )
                 })}
             </div>    
