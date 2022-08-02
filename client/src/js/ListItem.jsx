@@ -2,7 +2,7 @@ import '../css/ListItem.css';
 
 const ListItem = (props) => {
     return (
-        <div className="list-item">
+        <div className={props.order === 0 ? "list-item first" : "list-item"}>
             <h3>{props.name} <span>({props.equipment})</span></h3>
             <div className="target-muscles">
                 <div className="primary">{props.primary}</div>

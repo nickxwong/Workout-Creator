@@ -1,5 +1,13 @@
 .list-item {
-    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.list-item.first {
+    border-top: 0;
+}
+
+.list-item:hover {
+    background: rgb(216, 216, 216);
 }
 
 .list-item h3 span {

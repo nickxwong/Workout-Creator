@@ -14,8 +14,7 @@ function App() {
   }; 
 
   return (
-    <div className="App">
-        <button onClick={getExercises}>Get Exercises</button>
+    <div className="App" onLoad={getExercises()}>
         <ExerciseList list={exerciseList}/>
     </div>
   );
