@@ -1,19 +1,19 @@
 import '../css/ExerciseList.css';
 import ListItem from './ListItem';
 
-const ExerciseList = (props) => {
+const ExerciseList = ({list, workout, setWorkout}) => {
     return (
-        <div className="ExerciseList">
+        <div className="exercise-list">
             <h3>Exercises</h3>
             <div className="container">
-                {props.list.map((val, index) => {
+                {list.map((cur, index) => {
                     return (
-                        <ListItem order={index} key={val.exercise_id} name={val.exercise_name} primary={val.primary_muscle} secondary={val.secondary_muscle} tertiary={val.tertiary_muscle} equipment={val.equipment_name}></ListItem>
+                        <ListItem index={index} key={cur.exercise_id} exercise={cur} workout={workout} setWorkout={setWorkout}></ListItem>
                     )
                 })}
-            </div>    
+            </div>     
         </div>
-    )
+    );
 };
 
 export default ExerciseList;

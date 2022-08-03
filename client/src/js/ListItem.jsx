@@ -1,20 +1,24 @@
 import '../css/ListItem.css';
 
-const ListItem = (props) => {
+const ListItem = ({index, exercise, workout, setWorkout}) => {
+    const addToWorkout = (name) => {
+        setWorkout([...workout, exercise]);
+    };
+
     return (
-        <div className={props.order === 0 ? "list-item first" : "list-item"}>
-            <h3>{props.name} <span>({props.equipment})</span></h3>
+        <div className={index === 0 ? "list-item first" : "list-item"} onClick={() => addToWorkout(exercise)}>
+            <h3>{exercise.exercise_name} <span>({exercise.equipment_name})</span></h3>
             <div className="target-muscles">
-                <div className="primary">{props.primary}</div>
-                {props.secondary != null &&
-                    <div className="secondary">{props.secondary}</div>
+                <div className="primary">{exercise.primary_muscle}</div>
+                {exercise.secondary_muscle != null &&
+                    <div className="secondary">{exercise.secondary_muscle}</div>
                 }
-                {props.tertiary != null &&
-                    <div className="tertiary">{props.tertiary}</div>
+                {exercise.tertiary_muscle != null &&
+                    <div className="tertiary">{exercise.tertiary_muscle}</div>
                 }
             </div>
         </div>
-    )
+    );
 };
 
 export default ListItem;

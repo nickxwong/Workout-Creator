@@ -1,17 +1,11 @@
-.ExerciseList {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-  
 h3 {
     margin: 0;
     font-size: 30px;
 }
 
-.container {
-    border: 1px solid black;
+.exercise-list > .container {
     height: 500px;
-    width: 33vw; 
+    width: 30vw;
+    border: 1px solid black;
     overflow-y: auto;
 }

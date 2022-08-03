@@ -1,0 +1,6 @@
+.current-workout > .container {
+    height: 500px; 
+    width: 60vw;
+    border: 1px solid black;
+    overflow-y: auto;
+}
