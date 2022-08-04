@@ -25,8 +25,19 @@ function App() {
 
     return (
         <div className="app">
-            <ExerciseList list={exerciseList} workout={currentWorkout} setWorkout={setWorkout} />
-            <CurrentWorkout workout={currentWorkout} setWorkout={setWorkout} />
+            <div className="header">
+                <div className="left-section"></div>
+                <div className="middle-section">
+                    <h1>Workout Creator</h1>
+                    </div>
+                <div className="right-section">
+                    <button>User Login</button>
+                </div>
+            </div>
+            <div className="content">
+                <ExerciseList list={exerciseList} workout={currentWorkout} setWorkout={setWorkout} />
+                <CurrentWorkout workout={currentWorkout} setWorkout={setWorkout} />    
+            </div>
         </div>
     )
 }

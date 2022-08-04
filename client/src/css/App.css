@@ -1,4 +1,26 @@
+body {
+    margin: 0;
+}
+
 .app {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 0 15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+}
+
+.header > .right-section > button {
+    height: 2rem;
+    width: 7rem;
+}
+
+.content {
     display: flex;
     justify-content: center;
     gap: 15px;
