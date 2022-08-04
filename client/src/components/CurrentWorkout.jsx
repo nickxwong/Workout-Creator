@@ -28,7 +28,13 @@ export default function CurrentWorkout ({ workout, setWorkout }) {
                 <div className="container">
                     {workout.map((value, i) => {
                         return (
-                            <WorkoutItem key={value.exercise.exercise_id + '/' + i} index={i} id={value.exercise.exercise_id + '/' + i} exercise={value.exercise} numSets={value.numSets} workout={workout} setWorkout={setWorkout} moveItem={moveItem} />
+                            <WorkoutItem key={value.exercise.exercise_id + '/' + i} index={i} 
+                                         id={value.exercise.exercise_id + '/' + i} 
+                                         exercise={value.exercise} 
+                                         setsReps={value.setsReps} 
+                                         workout={workout} 
+                                         setWorkout={setWorkout} 
+                                         moveItem={moveItem} />
                         )
                     })}
                 </div>    

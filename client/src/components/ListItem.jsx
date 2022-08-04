@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function ListItem({ index, exercise, workout, setWorkout }) {
 	const addToWorkout = (exercise) => {
-		setWorkout([...workout, {'exercise': exercise, 'numSets': 0}])
+		setWorkout([...workout, {'exercise': exercise, 'setsReps': [{'set': 1, 'reps': 0}]}])
 	}
 
 	return (

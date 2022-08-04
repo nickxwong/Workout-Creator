@@ -7,16 +7,18 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 // components
 import ExerciseSet from './ExerciseSet'
 
-export default function WorkoutItem ({ id, index, exercise, numSets, workout, setWorkout, moveItem }) {
+export default function WorkoutItem ({ id, index, exercise, setsReps, workout, setWorkout, moveItem }) {
+    
     const addIcon = <FontAwesomeIcon icon={faPlus} />
     
-    const [x, setNumSets] = useState(numSets);
+    const [numSets, setNumSets] = useState(setsReps.length);
 
     const addSet = () => {
         workout.forEach((val, i) => {
             if (i === index) {
-                val.numSets++
-                setNumSets(val.numSets);
+                val.setsReps.push({'set': numSets + 1, 'reps': 0})
+                setNumSets(val.setsReps.length)
+                return
             }
         })
     }
@@ -83,9 +85,9 @@ export default function WorkoutItem ({ id, index, exercise, numSets, workout, se
                 <p className="remove-button" onClick={removeExercise}>Remove</p>    
             </div>
             <div className="exercise-sets">
-                {[...Array(x)].map((value, i) => {
+                {[...Array(numSets)].map((value, i) => {
                     return (
-                        <ExerciseSet key={i} index={i + 1} />
+                        <ExerciseSet key={i} index={i + 1} exerciseIndex={index} workout={workout} setWorkout={setWorkout} />
                     )
                 })}
                 <div className="add-button" onClick={addSet}>{addIcon}</div>
