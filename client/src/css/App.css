@@ -1,5 +1,129 @@
-.App {
+.app {
     display: flex;
     justify-content: center;
     gap: 15px;
 }
+
+/* ExerciseList */
+.exercise-list > h3 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.exercise-list > .container {
+    height: 500px;
+    width: 20vw;
+    border: 1px solid black;
+    overflow-y: auto;
+}
+
+/* ListItem */
+.list-item {
+    padding: 0.25rem;
+}
+
+.list-item:not(.first) {
+    border-top: 1px solid black;
+}
+
+.list-item:hover {
+    background: rgb(216, 216, 216);
+}
+
+.list-item h3, 
+.list-item p {
+    margin: 0;
+}
+
+.exercise-info {
+    display: flex;
+    gap: 1rem;
+}
+
+.exercise-info > .equipment {
+    font-weight: 700;
+}
+
+.exercise-info p:not(.equipment) {
+    font-style: italic;
+}
+
+/* CurrentWorkout */
+.current-workout > h3 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.current-workout > .container {
+    height: 500px;
+    width: 70vw;
+    border: 1px solid black;
+    overflow-y: auto;
+}
+
+/* WorkoutItem */
+.workout-item {
+    border-bottom: 1px solid black;
+    height: 100px;
+    display: flex;
+}
+
+.workout-item > .info {
+    border-right: 1px solid black;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem;
+}
+
+.workout-item > .info > h3,
+.workout-item > .info > p {
+    margin: 0;
+}
+
+.exercise-sets {
+    display: flex;
+}
+
+.exercise-sets > .add-button {
+    border-right: 1px solid black;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+}
+
+.exercise-sets > .add-button:hover {
+    background: rgb(216, 216, 216);
+}
+
+/* ExerciseSet */
+.exercise-set {
+    border-right: 1px solid black;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.exercise-set > p {
+    margin: 0;
+}
+
+.exercise-set > input {
+    width: 70%;
+    height: 50%;
+    font-size: 30px;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+.exercise-set > input:focus {
+    border: none;
+    outline: none;
+}
+
