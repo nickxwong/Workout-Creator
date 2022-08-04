@@ -81,6 +81,10 @@
     margin: 0;
 }
 
+.workout-item > .info > .remove-button:hover {
+    text-decoration: underline;
+}
+
 .exercise-sets {
     display: flex;
 }
