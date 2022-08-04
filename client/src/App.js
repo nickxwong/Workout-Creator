@@ -6,11 +6,13 @@ import '../src/css/App.css'
 // components
 import ExerciseList from './components/ExerciseList'
 import CurrentWorkout from './components/CurrentWorkout'
+import Login from './components/Login'
 
 function App() {
-
+    
     const [exerciseList, setList] = useState([])
     const [currentWorkout, setWorkout] = useState([])
+    const [showLogin, setShowLogin] = useState(false)
 
     const getExercises = () => {
         Axios.get('http://localhost:3001/exercises').then((response) => {
@@ -31,13 +33,14 @@ function App() {
                     <h1>Workout Creator</h1>
                     </div>
                 <div className="right-section">
-                    <button>User Login</button>
+                    <button onClick={() => setShowLogin(true)}>User Login</button>
                 </div>
             </div>
             <div className="content">
                 <ExerciseList list={exerciseList} workout={currentWorkout} setWorkout={setWorkout} />
                 <CurrentWorkout workout={currentWorkout} setWorkout={setWorkout} />    
             </div>
+            <Login show={showLogin} onClose={() => setShowLogin(false)} />
         </div>
     )
 }
