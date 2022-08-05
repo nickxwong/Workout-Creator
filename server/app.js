@@ -1,9 +1,15 @@
-const express = require('express');
-const app = express();
-const mysql = require('mysql');
-const cors = require('cors');
+const express = require('express')
+const app = express()
+const mysql = require('mysql')
+const cors = require('cors')
+const bodyParser = require('body-parser')
 
-app.use(cors());
+// const session = require('express-session')
+// const path = require('path')
+
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 const db = mysql.createConnection({
     user: 'root',
@@ -21,13 +27,39 @@ app.get('/exercises', (req, res) => {
              'INNER JOIN equipment ON exercises.equipment=equipment.equipment_id'
              , (err, result) => {
         if (err) {
-            console.log(err);
+            console.log(err)
         } else {
-            res.send(result);
+            res.send(result)
         }
-    });
+    })
 });
 
+app.post('/login', (req, res) => {
+    const username = req.body.username
+    const password = req.body.password
+    db.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], (err, result) => {
+        if (err) {
+            console.log(err)
+        } else if (result.length > 0) {
+            res.send({token: result[0].token})
+        } else {
+            res.send({message: 'Incorrect username and/or password'})
+        }
+    })
+})
+
+const encodeBase64 = (str) => {
+    return Buffer.from(data).toString('base64')
+}
+
+async function hashCodeVerifier(code_verifier) {
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(code_verifier));
+    return encodeBase64(String.fromCharCode(...new Uint8Array(digest)))
+        .replace(/=/g, '')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_');
+}
+
 app.listen(3001, () => {
-    console.log("Server running!");
+    console.log("Server running!")
 });

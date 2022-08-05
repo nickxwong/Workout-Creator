@@ -1,6 +1,5 @@
 // libraries
 import React from 'react'
-import { useState } from 'react'
 // components
 
 export default function ExerciseSet ({ index, exerciseIndex, workout, setWorkout }) {
