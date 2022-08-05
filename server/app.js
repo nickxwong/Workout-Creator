@@ -3,6 +3,7 @@ const app = express()
 const mysql = require('mysql')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const { subtle } = require('crypto').webcrypto
 
 // const session = require('express-session')
 // const path = require('path')
@@ -43,22 +44,48 @@ app.post('/login', (req, res) => {
         } else if (result.length > 0) {
             res.send({token: result[0].token})
         } else {
-            res.send({message: 'Incorrect username and/or password'})
+            res.send({token: null})
         }
     })
 })
 
-const encodeBase64 = (str) => {
+const encodeBase64 = (data) => {
     return Buffer.from(data).toString('base64')
 }
 
-async function hashCodeVerifier(code_verifier) {
-    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(code_verifier));
+async function generateToken(str) {
+    const digest = await subtle.digest('SHA-512', new TextEncoder().encode(str))
     return encodeBase64(String.fromCharCode(...new Uint8Array(digest)))
         .replace(/=/g, '')
         .replace(/\+/g, '-')
         .replace(/\//g, '_');
 }
+
+app.post('/duplicate', (req, res) => {
+    const username = req.body.username
+    db.query('SELECT * FROM users WHERE username = ?', [username], (err, result) => {
+        if (err) {
+            console.log(err)
+        } else if (result.length > 0) {
+            res.send({duplicate: true})
+        } else {
+            res.send({duplicate: false})
+        }
+    })
+})
+
+app.post('/register', (req, res) => {
+    const username = req.body.username
+    const password = req.body.password 
+    generateToken(username + "" + password).then(token => {
+        db.query('INSERT INTO users (username, password, token) VALUES (?, ?, ?)', [username, password, token], (err, result) => {
+            if (err) {
+                console.Console.log(err)
+            } else {
+                res.send({token: token})
+            }
+        })})
+})
 
 app.listen(3001, () => {
     console.log("Server running!")

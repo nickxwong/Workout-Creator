@@ -13,8 +13,8 @@ export default function ListItem({ index, exercise, workout, setWorkout }) {
     		<div className="exercise-info"> 
 				<p className="equipment">{exercise.equipment_name}</p>
 				<p>{exercise.primary_muscle}</p>
-				{ exercise.secondary_muscle != null && <p>{exercise.secondary_muscle}</p> }
-				{ exercise.tertiary_muscle != null && <p>{exercise.tertiary_muscle}</p> }
+				{exercise.secondary_muscle != null && <p>{exercise.secondary_muscle}</p>}
+				{exercise.tertiary_muscle != null && <p>{exercise.tertiary_muscle}</p>}
       		</div>
     	</div>
   	)

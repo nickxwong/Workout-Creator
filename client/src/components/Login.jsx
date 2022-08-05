@@ -1,23 +1,17 @@
 // libraries
 import React from 'react'
-import { useState } from 'react'
 import Axios from 'axios'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
 // components
 
-export default function Login ({ show, onClose }) {
-
-    const xIcon = <FontAwesomeIcon icon={faXmark}/>
-
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+export default function Login ({ onClose, setShowLogin }) {
 
     const setToken = (token) => {
         sessionStorage.setItem('token', token)
     }
 
     const handleLogin = () => {
+        const username = document.getElementById('login-username').value
+        const password = document.getElementById('login-password').value
         Axios.post('http://localhost:3001/login', {
             username: username,
             password: password,
@@ -31,20 +25,15 @@ export default function Login ({ show, onClose }) {
         })
     }
 
-    if (!show) {
-        return null
-    }
-
     return (
-        <div className="login">
-            <div className="close-button" onClick={onClose}>{xIcon}</div>
+        <div className="modal-content">
             <h2>User Login</h2>
             <form>
-                <input type="text" placeholder="Username*" required onChange={event => setUsername(event.target.value)}/>
-                <input type="password" placeholder="Password*" required onChange={event => setPassword(event.target.value)}/>
-                <button type="button" onClick={(e) => handleLogin(e)}>Log in</button>
+                <input id="login-username" type="text" placeholder="Username*" required/>
+                <input id="login-password" type="password" placeholder="Password*" required/>
+                <button type="button" onClick={handleLogin}>Log in</button>
             </form>
+            <p onClick={() => setShowLogin(false)}>Not a user? Click here to register.</p>
         </div>
     )
 }
-
