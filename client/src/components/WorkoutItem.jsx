@@ -2,6 +2,7 @@
 import React from 'react'
 import { useState, useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
+import update from 'immutability-helper'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 // components
@@ -14,13 +15,9 @@ export default function WorkoutItem ({ id, index, exercise, setsReps, workout, s
     const [numSets, setNumSets] = useState(setsReps.length);
 
     const addSet = () => {
-        workout.forEach((val, i) => {
-            if (i === index) {
-                val.setsReps.push({'set': numSets + 1, 'reps': 0})
-                setNumSets(val.setsReps.length)
-                return
-            }
-        })
+        const updatedWorkout = update(workout, {[index]: {setsReps: {$push: [{'set': numSets + 1, 'reps': 0,}]}}})
+        setWorkout(updatedWorkout)
+        setNumSets(numSets + 1)
     }
 
     const removeExercise = () => {
