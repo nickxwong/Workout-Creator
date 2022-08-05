@@ -26,7 +26,7 @@ body {
     gap: 15px;
 }
 
-/* Modal */
+/* Login/Registration Modal */
 .modal {
     position: fixed;
     left: 50%;
@@ -51,7 +51,6 @@ body {
     cursor: pointer;
 }
 
-/* Login */
 .modal-content {
     display: flex;
     flex-direction: column;
@@ -131,11 +130,31 @@ form input {
     font-size: 30px;
 }
 
-.current-workout > .container {
+.current-workout > .workout-container {
     height: 500px;
     width: 70vw;
     border: 1px solid black;
     overflow-y: auto;
+}
+
+.current-workout > .stats-container {
+    margin-top: 15px;
+    /* border: 1px solid black; */
+    width: 70vw;
+    height: 300px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 7px;
+}
+
+/* StatsModule */
+.stats-module {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* WorkoutItem */
