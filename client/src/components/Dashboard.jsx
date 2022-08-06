@@ -3,12 +3,14 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
 // components
+import eventBus from '../EventBus'
 
 export default function Dashboard ({ loginStatus, show, setShowDashboard, setWorkout }) {
 
     const[savedWorkouts, setSavedWorkouts] = useState([])
 
     useEffect(() => {
+        eventBus.on('workoutRefresh', getSavedWorkouts)
         getSavedWorkouts()
     }, [])
 

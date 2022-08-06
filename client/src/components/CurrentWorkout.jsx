@@ -8,6 +8,7 @@ import Axios from 'axios'
 // components
 import WorkoutItem from './WorkoutItem'
 import StatsModule from './StatsModule'
+import eventBus from '../EventBus'
 
 export default function CurrentWorkout ({ workout, setWorkout, loginStatus }) {
 
@@ -79,6 +80,7 @@ export default function CurrentWorkout ({ workout, setWorkout, loginStatus }) {
         }).then((response) => {
             if (response.data.success) {
                 alert("Workout saved.")
+                eventBus.dispatch('workoutRefresh')
             } else {
                 alert("Workout failed")
             }
