@@ -12,6 +12,10 @@ export default function Dashboard ({ loginStatus, show, setShowDashboard, setWor
     useEffect(() => {
         eventBus.on('workoutRefresh', getSavedWorkouts)
         getSavedWorkouts()
+
+        return () => {
+            eventBus.remove('workoutRefresh')
+        }
     }, [])
 
     const getSavedWorkouts = () => {

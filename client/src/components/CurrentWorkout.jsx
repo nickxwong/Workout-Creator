@@ -82,7 +82,7 @@ export default function CurrentWorkout ({ workout, setWorkout, loginStatus }) {
                 alert("Workout saved.")
                 eventBus.dispatch('workoutRefresh')
             } else {
-                alert("Workout failed")
+                alert("Workout save failed")
             }
         })
     }

@@ -5,9 +5,11 @@ import Axios from 'axios'
 import '../src/css/App.css'
 // components
 import ExerciseList from './components/ExerciseList'
+import ExerciseCreator from './components/ExerciseCreator'
 import CurrentWorkout from './components/CurrentWorkout'
 import Modal from './components/Modal'
 import Dashboard from './components/Dashboard'
+import eventBus from './EventBus'
 
 function App() {
     
@@ -17,15 +19,22 @@ function App() {
     const [loginStatus, setLoginStatus] = useState(false)
     const [showDashboard, setShowDashboard] = useState(false)
 
-    const getExercises = () => {
-        Axios.get('http://localhost:3001/exercises').then((response) => {
+    const getExercises = () => {        
+        Axios.post('http://localhost:3001/getexercises', {
+            token: sessionStorage.getItem('token')
+        }).then((response) => {
             setList(response.data)
         })
     }
 
     // grabs lists of exercises from database on page load
     useEffect(() => {
+        eventBus.on('exerciseRefresh', getExercises)
         getExercises()
+
+        return () => {
+            eventBus.remove('exerciseRefresh')
+        }
     }, [])
 
     const logoutUser = () => {
@@ -51,7 +60,10 @@ function App() {
                 </div>
             </div>
             <div className="content">
-                <ExerciseList list={exerciseList} workout={currentWorkout} setWorkout={setWorkout} />
+                <div className="exercise-section">
+                    <ExerciseList list={exerciseList} workout={currentWorkout} setWorkout={setWorkout} />    
+                    <ExerciseCreator loginStatus={loginStatus}/>
+                </div>
                 <CurrentWorkout workout={currentWorkout} setWorkout={setWorkout} loginStatus={loginStatus} />    
             </div>
             <Modal show={showModal} onClose={() => setShowModal(false)} setLoginStatus={setLoginStatus} />
