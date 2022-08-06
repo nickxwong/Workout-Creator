@@ -11,7 +11,6 @@ export default function ExerciseSet ({ index, exerciseIndex, workout, setWorkout
         workout.forEach((val, i) => {
             if (i === exerciseIndex) {
                 val.setsReps[index - 1].reps = repCount
-                console.log(workout)
                 setWorkout(workout)
             }
         })

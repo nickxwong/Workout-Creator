@@ -3,7 +3,7 @@ import React from 'react'
 import Axios from 'axios'
 // components
 
-export default function Register ({ onClose, setShowLogin }) {
+export default function Register ({ onClose, setShowLogin, setLoginStatus }) {
 
     async function checkIfDuplicate (username) {
         return await Axios.post('http://localhost:3001/duplicate', {
@@ -14,7 +14,9 @@ export default function Register ({ onClose, setShowLogin }) {
     }
 
     const setToken = (token) => {
+        sessionStorage.setItem('username', document.getElementById('register-username').value)
         sessionStorage.setItem('token', token)
+        setLoginStatus(true)
     }
 
     const handleRegistration = () => {

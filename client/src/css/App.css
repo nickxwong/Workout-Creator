@@ -20,10 +20,53 @@ body {
     width: 7rem;
 }
 
+.header .user-info h3,
+.header .user-info p {
+    margin: 0;
+    text-align: right;
+}
+
+.header .user-info p:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .content {
     display: flex;
     justify-content: center;
     gap: 15px;
+}
+
+/* Dashboard */
+.dashboard {
+    position: fixed;
+    right: 15px;
+    top: 27px;
+    height: 400px;
+    width: 250px;
+    border: 1px solid black;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+.dashboard h3 {
+    font-size: 25px;
+    margin: 0;
+}
+
+.dashboard ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard li:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 /* Login/Registration Modal */
@@ -125,9 +168,29 @@ form input {
 }
 
 /* CurrentWorkout */
-.current-workout > h3 {
+.current-workout > .options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.current-workout > .options > button {
+    width: 5rem;
+}
+
+.current-workout .workout-name {
+    display: flex;
+    gap: 5px;
+}
+
+.current-workout .workout-name > h3 {
     margin: 0;
     font-size: 30px;
+}
+
+.current-workout .workout-name > input {
+    font-size: 30px;
+    border: none;
+    outline: none;
 }
 
 .current-workout > .workout-container {

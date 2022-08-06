@@ -3,10 +3,12 @@ import React from 'react'
 import Axios from 'axios'
 // components
 
-export default function Login ({ onClose, setShowLogin }) {
+export default function Login ({ onClose, setShowLogin, setLoginStatus }) {
 
     const setToken = (token) => {
+        sessionStorage.setItem('username', document.getElementById('login-username').value)
         sessionStorage.setItem('token', token)
+        setLoginStatus(true)
     }
 
     const handleLogin = () => {

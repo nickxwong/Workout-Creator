@@ -33,7 +33,18 @@ app.get('/exercises', (req, res) => {
             res.send(result)
         }
     })
-});
+})
+
+app.post('/getworkouts', (req, res) => {
+    const token = req.body.token
+    db.query('SELECT workouts.workout_name, workouts.workout_content, workouts.workout_id FROM workouts WHERE user_token = ?', [token], (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
+})
 
 app.post('/login', (req, res) => {
     const username = req.body.username
@@ -80,11 +91,24 @@ app.post('/register', (req, res) => {
     generateToken(username + "" + password).then(token => {
         db.query('INSERT INTO users (username, password, token) VALUES (?, ?, ?)', [username, password, token], (err, result) => {
             if (err) {
-                console.Console.log(err)
+                console.log(err)
             } else {
                 res.send({token: token})
             }
         })})
+})
+
+app.post('/saveworkout', (req, res) => {
+    const workoutName = req.body.name 
+    const workoutContent = req.body.content 
+    const userToken = req.body.token 
+    db.query('INSERT INTO workouts (workout_name, workout_content, user_token) VALUES (?, ?, ?)', [workoutName, workoutContent, userToken], (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send({'success': true})
+        }
+    })
 })
 
 app.listen(3001, () => {

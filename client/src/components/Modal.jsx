@@ -7,7 +7,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Login from './Login'
 import Register from './Register'
 
-export default function Modal ({ show, onClose }) {
+export default function Modal ({ show, onClose, setLoginStatus }) {
 
     const xIcon = <FontAwesomeIcon icon={faXmark}/>
 
@@ -20,8 +20,8 @@ export default function Modal ({ show, onClose }) {
     return (
         <div className="modal">
             <div className="close-button" onClick={onClose}>{xIcon}</div>
-            {showLogin && <Login onClose={onClose} setShowLogin={setShowLogin} />}
-            {!showLogin && <Register onClose={onClose} setShowLogin={setShowLogin}/>}    
+            {showLogin && <Login onClose={onClose} setShowLogin={setShowLogin} setLoginStatus={setLoginStatus}/>}
+            {!showLogin && <Register onClose={onClose} setShowLogin={setShowLogin} setLoginStatus={setLoginStatus}/>}    
         </div>
     )
 }
