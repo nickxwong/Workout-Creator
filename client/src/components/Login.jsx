@@ -2,6 +2,7 @@
 import React from 'react'
 import Axios from 'axios'
 // components
+import eventBus from '../EventBus'
 
 export default function Login ({ onClose, setShowLogin, setLoginStatus }) {
 
@@ -9,6 +10,7 @@ export default function Login ({ onClose, setShowLogin, setLoginStatus }) {
         sessionStorage.setItem('username', document.getElementById('login-username').value)
         sessionStorage.setItem('token', token)
         setLoginStatus(true)
+        eventBus.dispatch('exerciseRefresh')
     }
 
     const handleLogin = () => {
