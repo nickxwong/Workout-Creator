@@ -247,6 +247,7 @@ button:active {
     left: 50%;
     transform: translate(-50%, -50%);
     height: 200px;
+    right: 2%;
     width: 300px;
     border: 1px solid black;
     display: flex;
@@ -276,6 +277,18 @@ button:active {
     justify-content: space-around;
 }
 
+.workout-item .remove-button {
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    transform: translate(-50%, -50%);
+}
+
+.workout-item .remove-button:hover {
+    cursor: pointer;
+    color: rgb(65, 65, 65);
+}
+
 .workout-item > .info h3,
 .workout-item > .info p {
     margin: 0;
@@ -296,6 +309,7 @@ button:active {
 }
 
 .exercise-sets .add-button:hover {
+    cursor: pointer;
     background: rgb(216, 216, 216);
 }
 
