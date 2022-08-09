@@ -1,15 +1,18 @@
 // libraries
 import React from 'react'
-import { useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import update from 'immutability-helper'
 import Axios from 'axios'
 // components
 import WorkoutItem from './WorkoutItem'
+import SaveModal from './SaveModal'
 import eventBus from '../EventBus'
 
 export default function CurrentWorkout ({ workout, setWorkout, loginStatus }) {
+
+    const [showModal, setShowModal] = useState(false)
 
     const moveItem = useCallback((dragIndex, hoverIndex) => {
         setWorkout((prevIter) => 
@@ -43,6 +46,11 @@ export default function CurrentWorkout ({ workout, setWorkout, loginStatus }) {
         })
     }
 
+    const clearWorkout = () => {
+        setWorkout([])
+        document.getElementById('name-input').value = "Workout"
+    }
+
     return (
         <div className="current-workout">
             <div className="workout-header">
@@ -50,7 +58,16 @@ export default function CurrentWorkout ({ workout, setWorkout, loginStatus }) {
                     <h2>Name: </h2>
                     <input id="name-input" type="text" defaultValue="Workout"/>    
                 </div>
-                <button type="button" onClick={saveWorkout}>Save</button>
+                <div className="buttons">
+                    <button type="button" onClick={() => {
+                        if (workout.length > 0) {
+                            setShowModal(true)
+                        } else {
+                            clearWorkout()
+                        }
+                    }}>Clear</button>
+                    <button type="button" onClick={saveWorkout}>Save</button>    
+                </div>
             </div>
             <DndProvider backend={HTML5Backend}>
                 <div className="workout-container">
@@ -67,6 +84,7 @@ export default function CurrentWorkout ({ workout, setWorkout, loginStatus }) {
                     })}
                 </div>  
             </DndProvider>
+            <SaveModal showModal={showModal} setShowModal={setShowModal} clearWorkout={clearWorkout} setWorkout={setWorkout} saveWorkout={saveWorkout} />
         </div>
     )
 }

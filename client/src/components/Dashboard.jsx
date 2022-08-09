@@ -7,7 +7,7 @@ import Login from './Login'
 import Register from './Register'
 import eventBus from '../EventBus'
 
-export default function Dashboard ({ show, loginStatus, setLoginStatus, setWorkout }) {
+export default function Dashboard ({ showDashboard, loginStatus, setLoginStatus, setWorkout }) {
     
     const[savedWorkouts, setSavedWorkouts] = useState([])
 
@@ -43,7 +43,7 @@ export default function Dashboard ({ show, loginStatus, setLoginStatus, setWorko
         }
     }, [loginStatus])
 
-    if (!show) {
+    if (!showDashboard) {
         return null
     }
 

@@ -54,7 +54,7 @@ function App() {
                 <h1>Workout Creator</h1>
                 <div className="user" onMouseEnter={() => setShowDashboard(true)} onMouseLeave={() => setShowDashboard(false)}>
                     <div className="user-icon">{userIcon}</div>
-                    <Dashboard show={showDashboard} loginStatus={loginStatus} setLoginStatus={setLoginStatus} setWorkout={setWorkout} />
+                    <Dashboard showDashboard={showDashboard} loginStatus={loginStatus} setLoginStatus={setLoginStatus} setWorkout={setWorkout} />
                 </div>
             </div>
             <div className="content">

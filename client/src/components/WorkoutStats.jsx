@@ -37,8 +37,6 @@ export default function WorkoutStats ({ currentWorkout }) {
             const secondary = exercise.exercise.secondary_muscle 
             const tertiary = exercise.exercise.tertiary_muscle 
             newIter.forEach(current => {
-                console.log(current.muscleGroup)
-                console.log(primary)
                 if (current.muscleGroup === primary) {
                     current.numSets += numSets
                 }

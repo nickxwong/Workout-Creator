@@ -7,6 +7,7 @@ body {
 
 button {
     height: 1.5rem;
+    width: 4rem;
     background: rgb(255, 255, 255);
     border: 1px solid black;
     color: black;
@@ -93,6 +94,10 @@ button:active {
     text-decoration: underline;
 }
 
+.dashboard-content button {
+    width: 6rem;
+}
+
 .login-content {
     display: flex;
     flex-direction: column;
@@ -117,6 +122,10 @@ button:active {
     align-items: center;
     gap: 0.5rem;
     width: 80%;
+}
+
+.login-register button {
+    width: 5rem;
 }
 
 /* Content */
@@ -220,10 +229,34 @@ button:active {
     outline: none;
 }
 
+.current-workout .buttons {
+    display: flex;
+    gap: 1rem;
+}
+
 .current-workout .workout-container {
     flex: 1;
     border: 1px solid black;
     overflow-y: auto;
+}
+
+/* SaveModal */
+.save-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 200px;
+    width: 300px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.save-modal p {
+    text-align: center;
 }
 
 /* WorkoutItem */
