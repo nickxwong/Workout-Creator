@@ -17,7 +17,9 @@ export default function WorkoutItem ({ id, index, exercise, setsReps, workout, s
     const [numSets, setNumSets] = useState(setsReps.length);
 
     const addSet = () => {
-        const updatedWorkout = update(workout, {[index]: {setsReps: {$push: [{'set': numSets + 1, 'reps': 0,}]}}})
+        const length = workout[index].setsReps.length - 1
+        const prevReps = workout[index].setsReps[length].reps
+        const updatedWorkout = update(workout, {[index]: {setsReps: {$push: [{'set': numSets + 1, 'reps': prevReps,}]}}})
         setWorkout(updatedWorkout)
         setNumSets(numSets + 1)
     }
