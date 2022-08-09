@@ -10,6 +10,7 @@ import eventBus from '../EventBus'
 export default function Dashboard ({ showDashboard, loginStatus, setLoginStatus, setWorkout }) {
     
     const[savedWorkouts, setSavedWorkouts] = useState([])
+    const[darkMode, setDarkMode] = useState(false)
 
     const getSavedWorkouts = () => {
         // since conditional rendering occurs after component is mounted, this will prevent unnecessary backend calls
@@ -65,8 +66,15 @@ export default function Dashboard ({ showDashboard, loginStatus, setLoginStatus,
                         })}
                     </ul>    
                 </div>
-                <button type='button'>Dark Mode</button>
-                <button type='button' onClick={logoutUser}>Sign out</button>
+                {!darkMode && <button type="button" onClick={() => {
+                    document.body.classList.add('dark')
+                    setDarkMode(true)
+                }}>Dark Mode</button>}
+                {darkMode && <button type="button" onClick={() => {
+                    document.body.classList.remove('dark')
+                    setDarkMode(false)
+                }}>Light Mode</button>}
+                <button type="button" onClick={logoutUser}>Sign out</button>
             </div>}
         </div>
     )
