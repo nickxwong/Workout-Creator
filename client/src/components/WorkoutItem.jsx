@@ -4,12 +4,14 @@ import { useState, useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import update from 'immutability-helper'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faX } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 // components
 import ExerciseSet from './ExerciseSet'
 
 export default function WorkoutItem ({ id, index, exercise, setsReps, workout, setWorkout, moveItem }) {
     
+    const xIcon = <FontAwesomeIcon icon={faX} />
     const addIcon = <FontAwesomeIcon icon={faPlus} />
     
     const [numSets, setNumSets] = useState(setsReps.length);
@@ -79,7 +81,11 @@ export default function WorkoutItem ({ id, index, exercise, setsReps, workout, s
         <div className="workout-item" ref={ref} style={{opacity}} data-handler-id={handlerId}>
             <div className="info">
                 <h3>{exercise.exercise_name}</h3>
-                <p className="remove-button" onClick={removeExercise}>Remove</p>    
+                <div className="muscle-groups"> 
+                    <p>{exercise.primary_muscle}</p>
+                    {exercise.secondary_muscle != null && <p>{exercise.secondary_muscle}</p>}
+                    {exercise.tertiary_muscle != null && <p>{exercise.tertiary_muscle}</p>}
+      		    </div>
             </div>
             <div className="exercise-sets">
                 {[...Array(numSets)].map((value, i) => {

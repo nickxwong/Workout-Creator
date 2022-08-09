@@ -8,11 +8,10 @@ export default function ExerciseCreator ({ loginStatus }) {
     
     const saveExercise = () => {
         const name = document.getElementById('exercise-name').value
-        const equipment = document.getElementById('equipment').value
         const primary = document.getElementById('primary-muscle').value 
         let secondary = document.getElementById('secondary-muscle').value 
         let tertiary = document.getElementById('tertiary-muscle').value
-        if (name === "" || equipment === "" || primary === "") {
+        if (name === "" || primary === "") {
             alert('One or more required fields left empty.')
             return
         }
@@ -24,7 +23,6 @@ export default function ExerciseCreator ({ loginStatus }) {
         }
         Axios.post('http://localhost:3001/saveexercise', {
             name: name,
-            equipment: equipment,
             primary: primary,
             secondary: secondary,
             tertiary: tertiary,
@@ -43,21 +41,12 @@ export default function ExerciseCreator ({ loginStatus }) {
         <div className="exercise-creator">
             {!loginStatus && <div className="overlay"><p>Please sign in first before creating a custom exercise</p></div>}
             {loginStatus && <div className="creator-content">
-                <h3>Create a custom exercise</h3>
-                <p>Custom exercises are linked to your account.</p>
+                <div className="text">
+                    <h3>Create a custom exercise</h3>
+                    <p>Custom exercises are linked to your account.</p>    
+                </div>
                 <form>
                     <input id="exercise-name" type="text" placeholder="Name of exercise*"/>
-                    <select id="equipment" name="Equipment" defaultValue="">
-                        <option value="" disabled>Equipment</option>
-                        <option value="1">Bodyweight</option>
-                        <option value="2">Dumbbell</option>
-                        <option value="3">Free weight</option>
-                        <option value="4">Machine (plate-loaded)</option>
-                        <option value="5">Machine (pin-loaded)</option>
-                        <option value="6">Cable</option>
-                        <option value="7">Kettlebell</option>
-                        <option value="8">Resistance band</option>
-                    </select>
                     <select id="primary-muscle" name="Primary" defaultValue="">
                         <option value="" disabled>Primary muscle group</option>
                         <optgroup label="Chest">

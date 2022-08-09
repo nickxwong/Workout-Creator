@@ -21,12 +21,11 @@ const db = mysql.createConnection({
 
 app.post('/getexercises', (req, res) => {
     const token = req.body.token
-    db.query('SELECT exercises.exercise_id, exercises.exercise_name, primary_groups.muscle_name AS primary_muscle, secondary_groups.muscle_name AS secondary_muscle, tertiary_groups.muscle_name AS tertiary_muscle, equipment.equipment_name ' + 
+    db.query('SELECT exercises.exercise_id, exercises.exercise_name, primary_groups.muscle_name AS primary_muscle, secondary_groups.muscle_name AS secondary_muscle, tertiary_groups.muscle_name AS tertiary_muscle ' + 
              'FROM exercises ' +
              'INNER JOIN muscle_groups AS primary_groups ON exercises.primary_muscle=primary_groups.muscle_id ' + 
              'LEFT JOIN muscle_groups AS secondary_groups ON exercises.secondary_muscle=secondary_groups.muscle_id ' +
              'LEFT JOIN muscle_groups AS tertiary_groups ON exercises.tertiary_muscle=tertiary_groups.muscle_id ' +
-             'INNER JOIN equipment ON exercises.equipment=equipment.equipment_id ' +
              'WHERE user_token IS NULL OR user_token = ? '
              , [token], (err, result) => {
         if (err) {
@@ -118,9 +117,8 @@ app.post('/saveexercise', (req, res) => {
     const primary = req.body.primary 
     const secondary = req.body.secondary 
     const tertiary = req.body.tertiary
-    const equipment = req.body.equipment 
     const token = req.body.token
-    db.query('INSERT INTO exercises (exercise_name, primary_muscle, secondary_muscle, tertiary_muscle, equipment, user_token) VALUES (?, ?, ?, ?, ?, ?)', [name, primary, secondary, tertiary, equipment, token], (err, result) => {
+    db.query('INSERT INTO exercises (exercise_name, primary_muscle, secondary_muscle, tertiary_muscle, user_token) VALUES (?, ?, ?, ?, ?)', [name, primary, secondary, tertiary, token], (err, result) => {
         if (err) {
             console.log(err)
         } else {

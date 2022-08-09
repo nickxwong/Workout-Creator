@@ -3,20 +3,13 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
 // components
+import Login from './Login'
+import Register from './Register'
 import eventBus from '../EventBus'
 
-export default function Dashboard ({ loginStatus, show, setShowDashboard, setWorkout }) {
-
+export default function Dashboard ({ show, loginStatus, setLoginStatus, setWorkout }) {
+    
     const[savedWorkouts, setSavedWorkouts] = useState([])
-
-    useEffect(() => {
-        eventBus.on('workoutRefresh', getSavedWorkouts)
-        getSavedWorkouts()
-
-        return () => {
-            eventBus.remove('workoutRefresh')
-        }
-    }, [])
 
     const getSavedWorkouts = () => {
         // since conditional rendering occurs after component is mounted, this will prevent unnecessary backend calls
@@ -35,20 +28,46 @@ export default function Dashboard ({ loginStatus, show, setShowDashboard, setWor
         setWorkout(JSON.parse(workout))
     }
 
+    const logoutUser = () => {
+        sessionStorage.removeItem('username')
+        sessionStorage.removeItem('token')
+        setLoginStatus(false)
+    }
+
+    useEffect(() => {
+        eventBus.on('workoutRefresh', getSavedWorkouts)
+        getSavedWorkouts()
+
+        return () => {
+            eventBus.remove('workoutRefresh')
+        }
+    }, [loginStatus])
+
     if (!show) {
         return null
     }
 
     return (
-        <div onMouseEnter={() => setShowDashboard(true)} onMouseLeave={() => setShowDashboard(false)} className="dashboard">
-            <h3>Saved Workouts</h3>
-            <ul>
-                {savedWorkouts.map((value, i) => {
-                    return (
-                        <li key={value.workout_id} onClick={() => loadWorkout(value.workout_content)}>{value.workout_name}</li>
-                    )
-                })}
-            </ul>
+        <div className="dashboard">
+            {!loginStatus && <div className="login-content">
+                <Login setLoginStatus={setLoginStatus} />
+                <Register setLoginStatus={setLoginStatus} />
+            </div> }
+            {loginStatus && <div className="dashboard-content">
+                <h3>{sessionStorage.getItem('username')}</h3>
+                <div className="workout-list">
+                    <h4>Saved Workouts</h4>
+                    <ul>
+                        {savedWorkouts.map((value, i) => {
+                            return (
+                                <li key={value.workout_id} onClick={() => loadWorkout(value.workout_content)}>{value.workout_name}</li>
+                            )
+                        })}
+                    </ul>    
+                </div>
+                <button type='button'>Dark Mode</button>
+                <button type='button' onClick={logoutUser}>Sign out</button>
+            </div>}
         </div>
     )
 }

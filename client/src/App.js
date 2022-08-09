@@ -1,23 +1,26 @@
 // libraries
 import { useEffect, useState } from 'react'
 import Axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 // css
 import '../src/css/App.css'
 // components
 import ExerciseList from './components/ExerciseList'
 import ExerciseCreator from './components/ExerciseCreator'
 import CurrentWorkout from './components/CurrentWorkout'
-import Modal from './components/Modal'
 import Dashboard from './components/Dashboard'
+import WorkoutStats from './components/WorkoutStats'
 import eventBus from './EventBus'
 
 function App() {
     
     const [exerciseList, setList] = useState([])
     const [currentWorkout, setWorkout] = useState([])
-    const [showModal, setShowModal] = useState(false)
     const [loginStatus, setLoginStatus] = useState(false)
     const [showDashboard, setShowDashboard] = useState(false)
+
+    const userIcon = <FontAwesomeIcon icon={faUser} />
 
     const getExercises = () => {        
         Axios.post('http://localhost:3001/getexercises', {
@@ -27,46 +30,39 @@ function App() {
         })
     }
 
+    const loginUser = () => {
+        if (sessionStorage.getItem('token') != null) {
+            setLoginStatus(true)
+            
+        }
+    }
+
     // grabs lists of exercises from database on page load
     useEffect(() => {
         eventBus.on('exerciseRefresh', getExercises)
         getExercises()
+        loginUser()
 
         return () => {
             eventBus.remove('exerciseRefresh')
         }
     }, [])
 
-    const logoutUser = () => {
-        sessionStorage.removeItem('username')
-        sessionStorage.removeItem('token')
-        setLoginStatus(false)
-    }
-
     return (
         <div className="app">
             <div className="header">
-                <div className="left-section"></div>
-                <div className="middle-section">
-                    <h1>Workout Creator</h1>
-                </div>
-                <div className="right-section">
-                    {!loginStatus && <button onClick={() => setShowModal(true)}>User Login</button>}
-                    {loginStatus && <div className="user-info">
-                        <h3 onMouseEnter={() => setShowDashboard(true)} onMouseLeave={() => setShowDashboard(false)}>Username: {sessionStorage.getItem('username')}</h3>
-                        <p onClick={logoutUser}>Sign out</p> 
-                        <Dashboard loginStatus={loginStatus} show={showDashboard} setShowDashboard={setShowDashboard} setWorkout={setWorkout} />
-                    </div>}
+                <h1>Workout Creator</h1>
+                <div className="user" onMouseEnter={() => setShowDashboard(true)} onMouseLeave={() => setShowDashboard(false)}>
+                    <div className="user-icon">{userIcon}</div>
+                    <Dashboard show={showDashboard} loginStatus={loginStatus} setLoginStatus={setLoginStatus} setWorkout={setWorkout} />
                 </div>
             </div>
             <div className="content">
-                <div className="exercise-section">
-                    <ExerciseList list={exerciseList} workout={currentWorkout} setWorkout={setWorkout} />    
-                    <ExerciseCreator loginStatus={loginStatus}/>
-                </div>
-                <CurrentWorkout workout={currentWorkout} setWorkout={setWorkout} loginStatus={loginStatus} />    
+                <ExerciseList exerciseList={exerciseList} currentWorkout={currentWorkout} setWorkout={setWorkout} />
+                <CurrentWorkout workout={currentWorkout} setWorkout={setWorkout} loginStatus={loginStatus} />
+                <ExerciseCreator loginStatus={loginStatus}/>
+                <WorkoutStats currentWorkout={currentWorkout} />
             </div>
-            <Modal show={showModal} onClose={() => setShowModal(false)} setLoginStatus={setLoginStatus} />
         </div>
     )
 }

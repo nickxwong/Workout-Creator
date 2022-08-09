@@ -1,145 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
 body {
-    margin: 0;
+    margin: 0 3rem 0 3rem;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.app {
-    display: flex;
-    flex-direction: column;
+button {
+    height: 1.5rem;
+    background: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: black;
+    font-weight: 700;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    background:rgb(187, 187, 187)
+}
+
+/* Header */
 .header {
-    padding: 0 15px 0 15px;
+    padding-top: 1rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    height: 3rem;
 }
 
-.header > .right-section > button {
-    height: 2rem;
-    width: 7rem;
-}
-
-.header .user-info h3,
-.header .user-info p {
+.header h1 {
     margin: 0;
-    text-align: right;
+    font-size: 2.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
-.header .user-info p:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.content {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+.header .user {
+    font-size: 2.2rem; 
 }
 
 /* Dashboard */
 .dashboard {
-    position: fixed;
-    right: 15px;
-    top: 27px;
-    height: 400px;
-    width: 250px;
-    border: 1px solid black;
+    position: absolute;
+    right: 3rem;
+    width: 17rem;
     background: white;
+    border: 1px solid black;
+    padding: 1rem 0 1rem 0;
+} 
+
+.dashboard-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    padding: 10px;
+    gap: 1rem;
 }
 
-.dashboard h3 {
-    font-size: 25px;
+.dashboard-content h3 {
     margin: 0;
+    font-size: 1.7rem;
 }
 
-.dashboard ul {
+.dashboard-content h4 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.dashboard-content .workout-list {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    width: 80%;
+    height: 60%;
+    padding: 0.75rem 0 0.75rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-content ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.dashboard li:hover {
+.dashboard-content li {
+    font-size: 1.15rem;
+    text-align: center;
+}
+
+.dashboard-content li:hover {
     cursor: pointer;
     text-decoration: underline;
 }
 
-/* Login/Registration Modal */
-.modal {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    height: 250px;
-    width: 400px;
-    border: 1px solid black;
-    background: white;
+.login-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 1rem;
 }
 
-.modal > .close-button {
-    position: absolute;
-    right: 6px;
-    top: 5px;
-    font-size: 25px;
-    cursor: pointer;
-}
-
-.modal-content {
+.login-register {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    gap: 0.75rem;
 }
 
-.modal-content form {
-    width: 75%;
+.login-register h3 {
+    margin: 0;
+    font-size: 1.7rem;
+}
+
+.login-register form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 0.5rem;
+    width: 80%;
 }
 
-form input {
-    width: 100%;
-    height: 1.5rem;
-}
-
-.modal-content p {
-    font-style: italic;
-    cursor: pointer;
-}
-
-.modal-content p:hover {
-    text-decoration: underline;
-}
-
-/* Exercise section */
-.exercise-section {
-    width: 20vw;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+/* Content */
+.content {
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 25% 74%;
+    grid-template-rows: 525px 300px;
+    gap: 1rem;
 }
 
 /* ExerciseList */
-.exercise-list > h3 {
-    margin: 0;
-    font-size: 30px;
+.exercise-list {
+    display: flex;
+    flex-direction: column;
 }
 
-.exercise-list > .container {
-    height: 500px;
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-header h2 {
+    margin: 0;
+    font-size: 1.7rem;
+}
+
+.list-header form {
+    height: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.list-header select {
+    width: 10rem;
+}
+
+.exercise-list > .list-container {
+    flex: 1;
     width: 100%;
+    background: white;
     border: 1px solid black;
     overflow-y: auto;
 }
@@ -149,12 +168,17 @@ form input {
     padding: 0.25rem;
 }
 
-.list-item:not(.first) {
-    border-top: 1px solid black;
+.list-item.even {
+    background: rgb(247, 247, 247);
+}
+
+.list-item.odd {
+    background: white;
 }
 
 .list-item:hover {
-    background: rgb(216, 216, 216);
+    cursor: pointer;
+    border: 1px solid black;
 }
 
 .list-item h3, 
@@ -162,17 +186,107 @@ form input {
     margin: 0;
 }
 
-.exercise-info {
+.muscle-groups {
     display: flex;
     gap: 1rem;
 }
 
-.exercise-info > .equipment {
-    font-weight: 700;
+/* CurrentWorkout */
+.current-workout {
+    display: flex;
+    flex-direction: column; 
 }
 
-.exercise-info p:not(.equipment) {
-    font-style: italic;
+.workout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.workout-header .workout-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.workout-header h2 {
+    margin: 0;
+    font-size: 1.7rem;
+}
+
+.workout-header input {
+    font-size: 1.7rem;
+    border: none;
+    outline: none;
+}
+
+.current-workout .workout-container {
+    flex: 1;
+    border: 1px solid black;
+    overflow-y: auto;
+}
+
+/* WorkoutItem */
+.workout-item {
+    height: 15%;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.workout-item > .info {
+    position: relative;
+    width: 350px;
+    padding: 0.25rem;
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.workout-item > .info h3,
+.workout-item > .info p {
+    margin: 0;
+}
+
+.exercise-sets {
+    display: flex;
+    overflow-x: auto;
+}
+
+.exercise-sets .add-button {
+    border-right: 1px solid black;
+    width: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.exercise-sets .add-button:hover {
+    background: rgb(216, 216, 216);
+}
+
+/* ExerciseSet */
+.exercise-set {
+    border-right: 1px solid black;
+    width: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.exercise-set p {
+    margin: 0;
+}
+
+.exercise-set input {
+    width: 70%;
+    font-size: 1.3rem;
+    border: none;
+    outline: none;
+    text-align: center;
 }
 
 /* ExerciseCreator */
@@ -180,12 +294,16 @@ form input {
     border: 1px solid black;
     width: 100%;   
     height: 300px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .exercise-creator > .overlay {
     height: 100%;
     width: 100%;
-    background: white;
+    background: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -195,145 +313,54 @@ form input {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 1.5rem;
 }
 
 .creator-content h3,
 .creator-content p {
     margin: 0;
-}
-
-.creator-content form {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 80%;
-}
-
-form button {
-    width: 40%;
-}
-
-/* CurrentWorkout */
-.current-workout > .options {
-    display: flex;
-    justify-content: space-between;
-}
-
-.current-workout > .options > button {
-    width: 5rem;
-}
-
-.current-workout .workout-name {
-    display: flex;
-    gap: 5px;
-}
-
-.current-workout .workout-name > h3 {
-    margin: 0;
-    font-size: 30px;
-}
-
-.current-workout .workout-name > input {
-    font-size: 30px;
-    border: none;
-    outline: none;
-}
-
-.current-workout > .workout-container {
-    height: 500px;
-    width: 70vw;
-    border: 1px solid black;
-    overflow-y: auto;
-}
-
-.current-workout > .stats-container {
-    margin-top: 15px;
-    width: 70vw;
-    height: 300px;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 7px;
-}
-
-/* StatsModule */
-.stats-module {
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* WorkoutItem */
-.workout-item {
-    border-bottom: 1px solid black;
-    height: 100px;
-    display: flex;
-}
-
-.workout-item > .info {
-    border-right: 1px solid black;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    padding: 0.25rem;
-}
-
-.workout-item > .info > h3,
-.workout-item > .info > p {
-    margin: 0;
-}
-
-.workout-item > .info > .remove-button:hover {
-    text-decoration: underline;
-}
-
-.exercise-sets {
-    display: flex;
-}
-
-.exercise-sets > .add-button {
-    border-right: 1px solid black;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
-}
-
-.exercise-sets > .add-button:hover {
-    background: rgb(216, 216, 216);
-}
-
-/* ExerciseSet */
-.exercise-set {
-    border-right: 1px solid black;
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
-
-.exercise-set > p {
-    margin: 0;
-}
-
-.exercise-set > input {
-    width: 70%;
-    height: 50%;
-    font-size: 30px;
-    border: none;
-    outline: none;
     text-align: center;
 }
 
-.exercise-set > input:focus {
-    border: none;
-    outline: none;
+.creator-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
 
+.creator-content form input,
+.creator-content form select {
+    width: 100%;
+    font-size: 1rem;
+}
+
+.creator-content form button {
+    margin-top: 1rem;
+}
+
+/* WorkoutStats */
+.workout-stats {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.7rem;
+}
+
+.stats-module {
+    padding: 0 0.5rem 0 0.5rem;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stats-module h3,
+.stats-module p {
+    margin: 0;
+    text-align: center;
+}
