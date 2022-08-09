@@ -5,18 +5,17 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const { subtle } = require('crypto').webcrypto
 
-// const session = require('express-session')
-// const path = require('path')
-
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+require('dotenv').config()
+
 const db = mysql.createConnection({
-    user: 'root',
-    host: 'localhost',
-    password: '@Rm74eda',
-    database: 'WorkoutCreator',
+    user: process.env.username,
+    host: process.env.host,
+    password: process.env.password,
+    database: process.env.database,
 });
 
 app.post('/getexercises', (req, res) => {
@@ -145,6 +144,6 @@ app.post('/saveexercise', (req, res) => {
     })
 })
 
-app.listen(3001, () => {
-    console.log("Server running!")
-});
+app.listen('3001', () => {
+    console.log('Server running')
+})
