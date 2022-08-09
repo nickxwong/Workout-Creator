@@ -250,6 +250,7 @@ button:active {
     right: 2%;
     width: 300px;
     border: 1px solid black;
+    background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;

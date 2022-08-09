@@ -22,7 +22,7 @@ function App() {
 
     const userIcon = <FontAwesomeIcon icon={faUser} />
 
-    const getExercises = () => {        
+    const getExercises = () => {   
         Axios.post('http://localhost:3001/getexercises', {
             token: sessionStorage.getItem('token')
         }).then((response) => {
@@ -58,7 +58,7 @@ function App() {
                 </div>
             </div>
             <div className="content">
-                <ExerciseList exerciseList={exerciseList} currentWorkout={currentWorkout} setWorkout={setWorkout} />
+                <ExerciseList exerciseList={exerciseList} setList={setList} currentWorkout={currentWorkout} setWorkout={setWorkout} />
                 <CurrentWorkout workout={currentWorkout} setWorkout={setWorkout} loginStatus={loginStatus} />
                 <ExerciseCreator loginStatus={loginStatus}/>
                 <WorkoutStats currentWorkout={currentWorkout} />

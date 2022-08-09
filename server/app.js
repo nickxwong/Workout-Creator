@@ -26,8 +26,26 @@ app.post('/getexercises', (req, res) => {
              'INNER JOIN muscle_groups AS primary_groups ON exercises.primary_muscle=primary_groups.muscle_id ' + 
              'LEFT JOIN muscle_groups AS secondary_groups ON exercises.secondary_muscle=secondary_groups.muscle_id ' +
              'LEFT JOIN muscle_groups AS tertiary_groups ON exercises.tertiary_muscle=tertiary_groups.muscle_id ' +
-             'WHERE user_token IS NULL OR user_token = ? '
+             'WHERE user_token IS NULL OR user_token=?'
              , [token], (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
+})
+
+app.post('/filter', (req, res) => {
+    const token = req.body.token
+    const muscleGroup = req.body.muscleGroup 
+    db.query('SELECT exercises.exercise_id, exercises.exercise_name, primary_groups.muscle_name AS primary_muscle, secondary_groups.muscle_name AS secondary_muscle, tertiary_groups.muscle_name AS tertiary_muscle ' + 
+             'FROM exercises ' +
+             'INNER JOIN muscle_groups AS primary_groups ON exercises.primary_muscle=primary_groups.muscle_id ' + 
+             'LEFT JOIN muscle_groups AS secondary_groups ON exercises.secondary_muscle=secondary_groups.muscle_id ' +
+             'LEFT JOIN muscle_groups AS tertiary_groups ON exercises.tertiary_muscle=tertiary_groups.muscle_id ' +
+             'WHERE (primary_muscle=? OR secondary_muscle=? OR tertiary_muscle=?) AND (user_token IS NULL OR user_token=?)'
+             , [muscleGroup, muscleGroup, muscleGroup, token], (err, result) => {
         if (err) {
             console.log(err)
         } else {
