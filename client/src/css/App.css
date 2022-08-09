@@ -388,6 +388,7 @@ button:active {
 
 .creator-content form button {
     margin-top: 1rem;
+    width: 8rem;
 }
 
 /* WorkoutStats */
