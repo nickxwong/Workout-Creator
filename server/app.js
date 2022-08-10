@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+
+const port = process.env.PORT || 3001
+
 const mysql = require('mysql')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -12,7 +15,7 @@ app.use(bodyParser.json())
 require('dotenv').config()
 
 const db = mysql.createConnection({
-    user: process.env.username,
+    user: process.env.user,
     host: process.env.host,
     password: process.env.password,
     database: process.env.database,
@@ -144,6 +147,17 @@ app.post('/saveexercise', (req, res) => {
     })
 })
 
-app.listen('3001', () => {
-    console.log('Server running')
+app.listen(port, (err) => {
+    if (err) {
+        console.log(err)
+        return 
+    }
+    console.log('Server active')
 })
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('../client/build'))
+    app.get('*', (req, res) => {
+        req.sendFile(path.resolve(__dirname, '../client/build', 'index.html'))
+    })
+}
