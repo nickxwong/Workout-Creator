@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
 
-const port = process.env.PORT || 3001
-
 const mysql = require('mysql')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -14,12 +12,16 @@ app.use(bodyParser.json())
 
 require('dotenv').config()
 
+const port = process.env.PORT || 3001
+
 const db = mysql.createConnection({
     user: process.env.user,
     host: process.env.host,
     password: process.env.password,
     database: process.env.database,
 });
+
+app.use(express.static('build'))
 
 app.post('/getexercises', (req, res) => {
     const token = req.body.token
