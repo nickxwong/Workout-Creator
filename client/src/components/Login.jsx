@@ -14,7 +14,7 @@ export default function Login ({ setLoginStatus }) {
             alert("One or more required fields left empty.")
             return
         }
-        Axios.post('http://localhost:3001/login', {
+        Axios.post('https://workoutcreator.herokuapp.com/login', {
             username: username,
             password: password,
         }).then((response) => {

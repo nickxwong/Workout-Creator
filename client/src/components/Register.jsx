@@ -22,7 +22,7 @@ export default function Register ({ setLoginStatus }) {
                 if (duplicate) {
                     alert('That username has already been taken. Please try another one.')
                 } else {
-                    Axios.post('http://localhost:3001/register', {
+                    Axios.post('https://workoutcreator.herokuapp.com/register', {
                         username: username,
                         password: password,
                     }).then((response) => {
@@ -34,7 +34,7 @@ export default function Register ({ setLoginStatus }) {
     }
 
     async function checkIfDuplicate (username) {
-        return await Axios.post('http://localhost:3001/duplicate', {
+        return await Axios.post('https://workoutcreator.herokuapp.com/duplicate', {
             username: username,
         }).then((response) => {
             return response.data.duplicate

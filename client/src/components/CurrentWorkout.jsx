@@ -32,7 +32,7 @@ export default function CurrentWorkout ({ workout, setWorkout, loginStatus }) {
         }
         const workoutName = document.getElementById('name-input').value
         const workoutContent = JSON.stringify(workout)
-        Axios.post('http://localhost:3001/saveworkout', {
+        Axios.post('https://workoutcreator.herokuapp.com/saveworkout', {
             name: workoutName,
             content: workoutContent,
             token: sessionStorage.getItem('token')

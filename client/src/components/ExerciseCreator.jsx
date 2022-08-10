@@ -21,7 +21,7 @@ export default function ExerciseCreator ({ loginStatus }) {
         if (tertiary === "" || tertiary === 0) {
             tertiary = null
         }
-        Axios.post('http://localhost:3001/saveexercise', {
+        Axios.post('https://workoutcreator.herokuapp.com/saveexercise', {
             name: name,
             primary: primary,
             secondary: secondary,

@@ -18,7 +18,7 @@ export default function Dashboard ({ showDashboard, loginStatus, setLoginStatus,
             return
         }
         const token = sessionStorage.getItem('token')
-        Axios.post('http://localhost:3001/getworkouts', {
+        Axios.post('https://workoutcreator.herokuapp.com/getworkouts', {
             token: token,
         }).then((response) => {
             setSavedWorkouts(response.data)

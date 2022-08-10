@@ -15,7 +15,7 @@ export default function ExerciseList({ exerciseList, setList, currentWorkout, se
         }
         const token = sessionStorage.getItem('token')
         // get exercises where primary muscle group matches
-        Axios.post('http://localhost:3001/filter', {
+        Axios.post('https://workoutcreator.herokuapp.com/filter', {
             token: token,
             muscleGroup: parseInt(muscleGroup),
         }).then((response) => {
