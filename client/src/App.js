@@ -23,7 +23,7 @@ function App() {
     const userIcon = <FontAwesomeIcon icon={faUser} />
 
     const getExercises = () => {   
-        Axios.post('http://localhost:3001/getexercises', {
+        Axios.post('https://workoutcreator.herokuapp.com/getexercises', {
             token: sessionStorage.getItem('token')
         }).then((response) => {
             setList(response.data)
